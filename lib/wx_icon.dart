@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:animated_icon_theme/animated_icon_theme.dart';
 import 'package:animated_transform/animated_transform.dart';
 
+/// Design captivating icons that effortlessly transform between states with fluid animations. Our intuitive API makes it easy to create beautiful and interactive elements for your Flutter app.
 class WxIcon extends Icon {
   /// Creates an animated icon
   const WxIcon(
@@ -65,6 +66,12 @@ class WxIcon extends Icon {
         color: color,
         opacity: opacity,
         size: size,
+        fill: fill,
+        weight: weight,
+        grade: grade,
+        opticalSize: opticalSize,
+        shadows: shadows,
+        applyTextScaling: applyTextScaling,
       ),
       child: AnimatedTransform(
         duration: duration,
@@ -73,7 +80,11 @@ class WxIcon extends Icon {
         rotate: rotate,
         flipX: flipX,
         flipY: flipY,
-        child: super.build(context),
+        child: Icon(
+          icon,
+          semanticLabel: semanticLabel,
+          textDirection: textDirection,
+        ),
       ),
     );
   }
