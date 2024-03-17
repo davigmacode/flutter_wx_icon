@@ -1,3 +1,5 @@
+library wx_icon;
+
 import 'package:flutter/widgets.dart';
 import 'package:animated_icon_theme/animated_icon_theme.dart';
 import 'package:animated_transform/animated_transform.dart';
