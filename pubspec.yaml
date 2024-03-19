@@ -15,7 +15,7 @@ screenshots:
     path: media/preview.gif
 
 funding:
- - https://www.buymeacoffee.com/davigmacode
+ - https://buymeacoffee.com/davigmacode
  - https://ko-fi.com/davigmacode
 
 environment:
@@ -27,6 +27,7 @@ dependencies:
     sdk: flutter
   animated_icon_theme: ^1.0.0
   animated_transform: ^1.0.2
+  widget_event: ^1.2.6
 
 dev_dependencies:
   flutter_test:
