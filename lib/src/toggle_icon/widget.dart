@@ -174,6 +174,7 @@ class _RenderToggleIconState extends State<_RenderToggleIcon>
           color: style.color,
           opacity: style.opacity ?? 1,
           scale: style.scale ?? 1,
+          rotate: style.rotate ?? 0,
           size: style.size,
         ),
       ],

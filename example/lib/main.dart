@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wx_icon/wx_icon.dart';
+import 'package:choice/choice.dart';
 import 'package:animated_checkmark/animated_checkmark.dart';
 import 'dart:math';
 
@@ -113,116 +114,195 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            InkWell(
-              onTap: changeIcon,
-              child: WxIcon(
-                _icons[_icon],
-                color: _color,
-                opacity: _opacity,
-                size: _size,
-                scale: _scale,
-                rotate: _rotate,
-                flipX: _flipX,
-                flipY: _flipY,
-              ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: 400,
+              minWidth: 400,
             ),
-            const SizedBox(height: 30),
-            SizedBox(
-              width: 250,
-              child: Slider(
-                value: _size,
-                max: 200,
-                min: 10,
-                label: _size.round().toString(),
-                onChanged: setSize,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: 250,
-              child: Slider(
-                value: _opacity,
-                max: 1,
-                min: 0,
-                label: _opacity.round().toString(),
-                onChanged: setOpacity,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Wrap(
-              spacing: 5,
+            child: Column(
               children: [
-                IconButton.outlined(
-                  onPressed: _decreaseRotate,
-                  icon: const Icon(Icons.rotate_left),
-                ),
-                IconButton.outlined(
-                  onPressed: _decreaseScale,
-                  icon: const Icon(Icons.keyboard_double_arrow_down),
-                ),
-                IconButton.outlined(
-                  onPressed: _increaseScale,
-                  icon: const Icon(Icons.keyboard_double_arrow_up),
-                ),
-                IconButton.outlined(
-                  onPressed: _increaseRotate,
-                  icon: const Icon(Icons.rotate_right),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Wrap(
-              spacing: 5,
-              children: [
-                IconButton.outlined(
-                  onPressed: _toggleFlipX,
-                  icon: const Icon(Icons.compare_arrows),
-                ),
-                RotatedBox(
-                  quarterTurns: 1,
-                  child: IconButton.outlined(
-                    onPressed: _toggleFlipY,
-                    icon: const Icon(Icons.compare_arrows),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: <Widget>[
+                        InkWell(
+                          onTap: changeIcon,
+                          child: WxIcon(
+                            _icons[_icon],
+                            color: _color,
+                            opacity: _opacity,
+                            size: _size,
+                            scale: _scale,
+                            rotate: _rotate,
+                            flipX: _flipX,
+                            flipY: _flipY,
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        SizedBox(
+                          width: 250,
+                          child: Slider(
+                            value: _size,
+                            max: 200,
+                            min: 10,
+                            label: _size.round().toString(),
+                            onChanged: setSize,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          width: 250,
+                          child: Slider(
+                            value: _opacity,
+                            max: 1,
+                            min: 0,
+                            label: _opacity.round().toString(),
+                            onChanged: setOpacity,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 5,
+                          children: [
+                            IconButton.outlined(
+                              onPressed: _decreaseRotate,
+                              icon: const Icon(Icons.rotate_left),
+                            ),
+                            IconButton.outlined(
+                              onPressed: _decreaseScale,
+                              icon:
+                                  const Icon(Icons.keyboard_double_arrow_down),
+                            ),
+                            IconButton.outlined(
+                              onPressed: _increaseScale,
+                              icon: const Icon(Icons.keyboard_double_arrow_up),
+                            ),
+                            IconButton.outlined(
+                              onPressed: _increaseRotate,
+                              icon: const Icon(Icons.rotate_right),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 5,
+                          children: [
+                            IconButton.outlined(
+                              onPressed: _toggleFlipX,
+                              icon: const Icon(Icons.compare_arrows),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: IconButton.outlined(
+                                onPressed: _toggleFlipY,
+                                icon: const Icon(Icons.compare_arrows),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: 200,
+                          alignment: Alignment.center,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: Colors.primaries.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              mainAxisSpacing: 2,
+                              crossAxisSpacing: 2,
+                              crossAxisCount: 6,
+                            ),
+                            itemBuilder: (_, i) {
+                              final color = Colors.primaries[i];
+                              return Card(
+                                color: color,
+                                child: InkWell(
+                                  onTap: () => setColor(color),
+                                  child: AnimatedCheckmark(
+                                    weight: 4,
+                                    color: Colors.white70,
+                                    value: _color == color,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Choice(
+                      multiple: true,
+                      clearable: true,
+                      builder: (choice, child) {
+                        return Wrap(
+                          spacing: 15,
+                          runSpacing: 15,
+                          children: [
+                            IconButton(
+                              onPressed: () => choice.select('bookmark'),
+                              icon: WxToggleIcon(
+                                Icons.bookmark,
+                                baseIcon: Icons.bookmark_border,
+                                selected: choice.selected('bookmark'),
+                                style: WxDrivenToggleIconStyle.fade(size: 24),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => choice.select('favorite'),
+                              icon: WxToggleIcon(
+                                Icons.favorite,
+                                baseIcon: Icons.favorite_border,
+                                selected: choice.selected('favorite'),
+                                style:
+                                    WxDrivenToggleIconStyle.scaleUp(size: 24),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => choice.select('star'),
+                              icon: WxToggleIcon(
+                                Icons.star,
+                                selected: choice.selected('star'),
+                                style: WxDrivenToggleIconStyle.scaleDown(
+                                  size: 24,
+                                  rotate: 45,
+                                  selectedStyle:
+                                      const WxToggleIconStyle(rotate: 0),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => choice.select('tree'),
+                              icon: WxToggleIcon(
+                                Icons.account_tree,
+                                baseIcon: Icons.account_tree_outlined,
+                                selected: choice.selected('tree'),
+                                style: const WxDrivenToggleIconStyle(
+                                  size: 24,
+                                  opacity: 0,
+                                  color: Colors.orange,
+                                  selectedStyle: WxToggleIconStyle(opacity: 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                )
               ],
             ),
-            const SizedBox(height: 10),
-            Container(
-              width: 200,
-              alignment: Alignment.center,
-              child: GridView.builder(
-                shrinkWrap: true,
-                itemCount: Colors.primaries.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 2,
-                  crossAxisSpacing: 2,
-                  crossAxisCount: 6,
-                ),
-                itemBuilder: (_, i) {
-                  final color = Colors.primaries[i];
-                  return Card(
-                    color: color,
-                    child: InkWell(
-                      onTap: () => setColor(color),
-                      child: AnimatedCheckmark(
-                        weight: 4,
-                        color: Colors.white70,
-                        value: _color == color,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

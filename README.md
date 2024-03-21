@@ -21,6 +21,19 @@ WxIcon(
   flipX: _flipX,
   flipY: _flipY,
 )
+
+IconButton(
+  onPressed: _toggleSelected,
+  icon: WxToggleIcon(
+    Icons.star,
+    selected: _selected,
+    style: WxDrivenToggleIconStyle.scaleDown(
+      size: 24,
+      rotate: 45,
+      selectedStyle: const WxToggleIconStyle(rotate: 0),
+    ),
+  ),
+)
 ```
 
 ## Sponsoring

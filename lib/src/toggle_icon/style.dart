@@ -13,6 +13,8 @@ class WxToggleIconStyle with Diagnosticable {
   /// Scale the size of the icon.
   final double? scale;
 
+  final double? rotate;
+
   /// The color to use when drawing the icon.
   final Color? color;
 
@@ -29,6 +31,7 @@ class WxToggleIconStyle with Diagnosticable {
   const WxToggleIconStyle({
     this.size,
     this.scale,
+    this.rotate,
     this.color,
     this.opacity,
     this.baseColor,
@@ -39,6 +42,7 @@ class WxToggleIconStyle with Diagnosticable {
   WxToggleIconStyle.from(WxToggleIconStyle? other)
       : size = other?.size,
         scale = other?.scale,
+        rotate = other?.rotate,
         color = other?.color,
         opacity = other?.opacity,
         baseColor = other?.baseColor,
@@ -49,6 +53,7 @@ class WxToggleIconStyle with Diagnosticable {
   WxToggleIconStyle copyWith({
     double? size,
     double? scale,
+    double? rotate,
     Color? color,
     double? opacity,
     Color? baseColor,
@@ -60,6 +65,7 @@ class WxToggleIconStyle with Diagnosticable {
     final style = WxToggleIconStyle(
       size: size ?? this.size,
       scale: scale ?? this.scale,
+      rotate: rotate ?? this.rotate,
       color: color ?? this.color,
       opacity: opacity ?? this.opacity,
       baseColor: baseColor ?? this.baseColor,
@@ -92,6 +98,7 @@ class WxToggleIconStyle with Diagnosticable {
     var style = copyWith(
       size: other.size,
       scale: other.scale,
+      rotate: other.rotate,
       color: other.color,
       opacity: other.opacity,
       baseColor: other.baseColor,
@@ -116,6 +123,7 @@ class WxToggleIconStyle with Diagnosticable {
     return WxToggleIconStyle(
       size: lerpDouble(a?.size, b?.size, t),
       scale: lerpDouble(a?.scale, b?.scale, t),
+      rotate: lerpDouble(a?.rotate, b?.rotate, t),
       color: Color.lerp(a?.color, b?.color, t),
       opacity: lerpDouble(a?.opacity, b?.opacity, t),
       baseColor: Color.lerp(a?.baseColor, b?.baseColor, t),
@@ -126,6 +134,7 @@ class WxToggleIconStyle with Diagnosticable {
   Map<String, dynamic> toMap() => {
         'size': size,
         'scale': scale,
+        'rotate': rotate,
         'color': color,
         'opacity': opacity,
         'outerColor': baseColor,
@@ -175,6 +184,7 @@ class WxDrivenToggleIconStyle extends WxToggleIconStyle
   const WxDrivenToggleIconStyle({
     super.size,
     super.scale,
+    super.rotate,
     super.color,
     super.opacity,
     super.baseColor,
@@ -195,6 +205,7 @@ class WxDrivenToggleIconStyle extends WxToggleIconStyle
 
   WxDrivenToggleIconStyle.fade({
     super.size,
+    super.rotate,
     super.color,
     super.baseColor,
     WxToggleIconStyle? selectedStyle,
@@ -213,6 +224,7 @@ class WxDrivenToggleIconStyle extends WxToggleIconStyle
 
   WxDrivenToggleIconStyle.scaleUp({
     super.size,
+    super.rotate,
     super.color,
     super.baseColor,
     WxToggleIconStyle? selectedStyle,
@@ -231,6 +243,7 @@ class WxDrivenToggleIconStyle extends WxToggleIconStyle
 
   WxDrivenToggleIconStyle.scaleDown({
     super.size,
+    super.rotate,
     super.color,
     super.baseColor,
     WxToggleIconStyle? selectedStyle,
@@ -284,6 +297,7 @@ class WxDrivenToggleIconStyle extends WxToggleIconStyle
   WxDrivenToggleIconStyle copyWith({
     double? size,
     double? scale,
+    double? rotate,
     Color? color,
     double? opacity,
     Color? baseColor,
@@ -294,9 +308,10 @@ class WxDrivenToggleIconStyle extends WxToggleIconStyle
   }) {
     return WxDrivenToggleIconStyle(
       size: size ?? this.size,
+      scale: scale ?? this.scale,
+      rotate: rotate ?? this.rotate,
       color: color ?? this.color,
       opacity: opacity ?? this.opacity,
-      scale: scale ?? this.scale,
       baseColor: baseColor ?? this.baseColor,
       baseOpacity: baseOpacity ?? this.baseOpacity,
       mergeResolved: mergeResolved ?? this.mergeResolved,
